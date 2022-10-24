@@ -2,12 +2,12 @@ import { Channel, Connection } from 'amqplib';
 import * as client from 'amqplib';
 import { rabbitMqConfigs } from '../configs/rabbitmq.configs';
 
-export class RabbitMQClient {
+export class RabbitMQProducerClient {
   queueName: string;
   connection: Connection;
   channel: Channel;
 
-  constructor(queueName: string | undefined) {
+  constructor(queueName?: string) {
     if (!queueName) queueName = 'arch-queue';
     this.queueName = queueName;
   }

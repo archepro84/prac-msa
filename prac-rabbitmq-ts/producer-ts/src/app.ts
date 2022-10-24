@@ -1,7 +1,7 @@
-import { RabbitMQClient } from './modules/rabbitmq.client';
+import { RabbitMQProducerClient } from './modules/rabbitmq-producer.client';
 
 async function main(): Promise<void> {
-  const rabbitMQClient: RabbitMQClient = new RabbitMQClient(null);
+  const rabbitMQClient: RabbitMQProducerClient = new RabbitMQProducerClient();
 
   await rabbitMQClient.connect();
 
