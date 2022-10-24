@@ -5,7 +5,8 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=dev nodemon --watch '*.ts' --exec 'ts-node' src/app.ts"
+    "dev": "NODE_ENV=dev nodemon --watch '*.ts' --exec 'ts-node' src/app.ts",
+    "prettify" : "prettier --write src/*.ts src/**/*.ts src/**/**/*.ts src/**/**/**/*.ts"
   },
   "keywords": [],
   "author": "",
