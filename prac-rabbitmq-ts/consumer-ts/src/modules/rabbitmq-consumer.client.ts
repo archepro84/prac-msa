@@ -15,8 +15,9 @@ export class RabbitMQConsumerClient {
   // RabbitMQ와 연결합니다.
   connect = async (): Promise<void> => {
     this.connection = await client.connect(
-      rabbitMqConfigs.url ? rabbitMqConfigs.url :
-        `amqps://${rabbitMqConfigs.user}:${rabbitMqConfigs.password}@${rabbitMqConfigs.host}/${rabbitMqConfigs.user}`,
+      rabbitMqConfigs.url
+        ? rabbitMqConfigs.url
+        : `amqps://${rabbitMqConfigs.user}:${rabbitMqConfigs.password}@${rabbitMqConfigs.host}/${rabbitMqConfigs.user}`
     );
 
     // Rabbit MQ의 Channel을 생성합니다.
@@ -26,11 +27,11 @@ export class RabbitMQConsumerClient {
     await this.channel.assertQueue(this.queueName);
   };
 
-  consume = async (onMessageConsumeEvent: (msg: ConsumeMessage | null) => void): Promise<void> => {
+  consume = async (
+    onMessageConsumeEvent: (msg: ConsumeMessage | null) => void
+  ): Promise<void> => {
     // queueName에 해당하는 Queue의 데이터를 수신합니다.
     //  데이터를 수신할 때, onMessageConsumeEvent에 해당하는 CallBack 이벤트가 실행됩니다.
     await this.channel.consume(this.queueName, onMessageConsumeEvent);
   };
-
 }
-

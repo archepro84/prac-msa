@@ -15,8 +15,9 @@ export class RabbitMQProducerClient {
   // RabbitMQ와 연결합니다.
   connect = async (): Promise<void> => {
     this.connection = await client.connect(
-      rabbitMqConfigs.url ? rabbitMqConfigs.url :
-        `amqps://${rabbitMqConfigs.user}:${rabbitMqConfigs.password}@${rabbitMqConfigs.host}/${rabbitMqConfigs.user}`,
+      rabbitMqConfigs.url
+        ? rabbitMqConfigs.url
+        : `amqps://${rabbitMqConfigs.user}:${rabbitMqConfigs.password}@${rabbitMqConfigs.host}/${rabbitMqConfigs.user}`
     );
 
     // Rabbit MQ의 Channel을 생성합니다.
@@ -29,10 +30,6 @@ export class RabbitMQProducerClient {
   // queueName에 해당하는 Queue에 메시지를 전송합니다.
   // 메시지는 한방향으로만 움직이기 때문에 Await을 사용하지 않습니다.
   send = (sendMessage: string): void => {
-    this.channel.sendToQueue(
-      this.queueName,
-      Buffer.from(sendMessage),
-    );
+    this.channel.sendToQueue(this.queueName, Buffer.from(sendMessage));
   };
 }
-

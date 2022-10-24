@@ -6,9 +6,10 @@ async function main(): Promise<void> {
   await rabbitMQClient.connect();
 
   setInterval(async () => {
-    await rabbitMQClient.send(`Producer to Consumer : ${new Date().toISOString()}`);
+    await rabbitMQClient.send(
+      `Producer to Consumer : ${new Date().toISOString()}`
+    );
   }, 2000);
 }
-
 
 main();

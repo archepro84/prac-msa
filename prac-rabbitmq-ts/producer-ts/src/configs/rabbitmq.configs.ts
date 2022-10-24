@@ -11,4 +11,3 @@ export const rabbitMqConfigs = {
   port: process.env.RABBIT_MQ_PORT,
   url: process.env.RABBIT_MQ_URL,
 };
-
