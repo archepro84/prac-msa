@@ -2,18 +2,18 @@ import { Channel, Connection } from 'amqplib';
 import * as client from 'amqplib';
 import { rabbitMqConfigs } from '../configs/rabbitmq.configs';
 
-export class RabbitmqClient {
+export class RabbitMQClient {
   queueName: string;
   connection: Connection;
   channel: Channel;
 
-  constructor(queueName: string | null) {
+  constructor(queueName: string | undefined) {
     if (!queueName) queueName = 'arch-queue';
     this.queueName = queueName;
   }
 
   // RabbitMQ와 연결합니다.
-  connect = async () => {
+  connect = async (): Promise<void> => {
     this.connection = await client.connect(
       rabbitMqConfigs.url ? rabbitMqConfigs.url :
         `amqps://${rabbitMqConfigs.user}:${rabbitMqConfigs.password}@${rabbitMqConfigs.host}/${rabbitMqConfigs.user}`,
@@ -28,13 +28,11 @@ export class RabbitmqClient {
 
   // queueName에 해당하는 Queue에 메시지를 전송합니다.
   // 메시지는 한방향으로만 움직이기 때문에 Await을 사용하지 않습니다.
-  send = async (sendMessage: string) => {
+  send = (sendMessage: string): void => {
     this.channel.sendToQueue(
       this.queueName,
       Buffer.from(sendMessage),
     );
   };
-
-
 }
 
