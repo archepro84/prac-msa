@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package company;
+
+service CompanyService {
+  rpc Create (CreateCompany) returns (Company) {}
+  rpc FindOne (CompanyById) returns (Company) {}
+  rpc FindAll (Empty) returns (stream Company) {}
+}
+
+message Company {
+  int32 id = 1;
+  string name = 2;
+}
+
+message CompanyById {
+  int32 id = 1;
+}
+
+message CreateCompany{
+  string name = 1;
+}
+
+message Empty{
+
+}
+
