@@ -1,7 +1,18 @@
-import { Body, Controller, Get, OnModuleInit, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  OnModuleInit,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
 import { CreateHero, HeroesService } from '../../proto/build/hero';
-import { grpcClientOptionsByHero } from './lib/grpc/grpc-client.options';
+import { CompanyService } from '../../proto/build/company';
+import {
+  grpcClientOptionsByCompany,
+  grpcClientOptionsByHero,
+} from './lib/grpc/grpc-client.options';
 
 @Controller()
 export class AppController implements OnModuleInit {
@@ -9,9 +20,15 @@ export class AppController implements OnModuleInit {
   private readonly clientHero: ClientGrpc;
   private heroService: HeroesService;
 
+  @Client(grpcClientOptionsByCompany)
+  private readonly clientCompany: ClientGrpc;
+  private companyService: CompanyService;
+
   onModuleInit(): any {
     this.heroService =
       this.clientHero.getService<HeroesService>('HeroesService');
+    this.companyService =
+      this.clientCompany.getService<CompanyService>('CompanyService');
   }
 
   @Get('hero/:id')
@@ -19,7 +36,7 @@ export class AppController implements OnModuleInit {
     return this.heroService.FindOne({ id: +id });
   }
 
-  @Post("hero")
+  @Post('hero')
   async createHero(@Body() hero: CreateHero) {
     const result = await this.heroService.Create(hero);
     return result;

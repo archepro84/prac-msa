@@ -8,3 +8,12 @@ export const grpcClientOptionsByHero: ClientOptions = {
     protoPath: '../proto/hero.proto',
   },
 };
+
+export const grpcClientOptionsByCompany: ClientOptions = {
+  transport: Transport.GRPC,
+  options: {
+    url: 'localhost:50091',
+    package: 'company',
+    protoPath: '../proto/company.proto',
+  },
+};
