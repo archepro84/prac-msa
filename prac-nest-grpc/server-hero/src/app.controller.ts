@@ -1,10 +1,10 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { Hero, HeroById, HeroesService } from '../../proto/build/hero';
+import { CreateHero, Hero, HeroById, HeroesService } from '../../proto/build/hero';
 
 @Controller()
 export class AppController {
-  private readonly heroArray: Hero[] = [
+  private heroArray: Hero[] = [
     {
       id: 1,
       firstName: 'foo1',
@@ -25,5 +25,16 @@ export class AppController {
   @GrpcMethod('HeroesService', 'FindAll')
   findAll() {
     return this.heroArray;
+  }
+
+  @GrpcMethod('HeroesService', 'Create')
+  Create(createHero: CreateHero) {
+    const heroId = Math.max(...this.heroArray.map((hero) => hero.id), 0) + 1;
+    const hero: Hero = {
+      id: heroId,
+      ...createHero
+    };
+    this.heroArray.push(hero);
+    return hero;
   }
 }
