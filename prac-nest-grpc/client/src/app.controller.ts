@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
 import { CreateHero, HeroesService } from '../../proto/build/hero';
-import { CompanyService } from '../../proto/build/company';
+import { CompanyService, CreateCompany } from '../../proto/build/company';
 import {
   grpcClientOptionsByCompany,
   grpcClientOptionsByHero,
@@ -39,6 +39,17 @@ export class AppController implements OnModuleInit {
   @Post('hero')
   async createHero(@Body() hero: CreateHero) {
     const result = await this.heroService.Create(hero);
+    return result;
+  }
+
+  @Get('company/:id')
+  async getCompany(@Param('id') id: string) {
+    return this.companyService.FindOne({ id: +id });
+  }
+
+  @Post('company')
+  async createCompany(@Body() company: CreateCompany) {
+    const result = await this.companyService.Create(company);
     return result;
   }
 }
