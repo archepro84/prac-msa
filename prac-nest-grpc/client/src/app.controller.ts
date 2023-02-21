@@ -7,8 +7,11 @@ import {
   Post,
 } from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
-import { CreateHero, HeroesService } from '../../proto/build/hero';
-import { CompanyService, CreateCompany } from '../../proto/build/company';
+import { CreateHero, HeroesService } from '../../proto/hero/build/hero';
+import {
+  CompanyService,
+  CreateCompany,
+} from '../../proto/company/build/company';
 import {
   grpcClientOptionsByCompany,
   grpcClientOptionsByHero,

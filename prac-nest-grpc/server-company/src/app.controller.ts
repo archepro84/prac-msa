@@ -4,7 +4,7 @@ import {
   CompanyById,
   CompanyService,
   CreateCompany,
-} from '../../proto/build/company';
+} from '../../proto/company/build/company';
 import { GrpcMethod } from '@nestjs/microservices';
 
 @Controller()

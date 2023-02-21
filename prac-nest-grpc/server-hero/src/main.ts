@@ -10,7 +10,7 @@ async function bootstrap() {
       options: {
         url: 'localhost:50090',
         package: 'hero',
-        protoPath: '../proto/hero.proto',
+        protoPath: '../proto/hero/hero.proto',
       },
     },
   );

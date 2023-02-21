@@ -5,7 +5,7 @@ export const grpcClientOptionsByHero: ClientOptions = {
   options: {
     url: 'localhost:50090',
     package: 'hero',
-    protoPath: '../proto/hero.proto',
+    protoPath: '../proto/hero/hero.proto',
   },
 };
 
@@ -14,6 +14,6 @@ export const grpcClientOptionsByCompany: ClientOptions = {
   options: {
     url: 'localhost:50091',
     package: 'company',
-    protoPath: '../proto/company.proto',
+    protoPath: '../proto/company/company.proto',
   },
 };

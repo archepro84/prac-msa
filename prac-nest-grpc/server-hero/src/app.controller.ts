@@ -1,6 +1,11 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { CreateHero, Hero, HeroById, HeroesService } from '../../proto/build/hero';
+import {
+  CreateHero,
+  Hero,
+  HeroById,
+  HeroesService,
+} from '../../proto/hero/build/hero';
 
 @Controller()
 export class AppController {
@@ -32,7 +37,7 @@ export class AppController {
     const heroId = Math.max(...this.heroArray.map((hero) => hero.id), 0) + 1;
     const hero: Hero = {
       id: heroId,
-      ...createHero
+      ...createHero,
     };
     this.heroArray.push(hero);
     return hero;
